@@ -70,6 +70,18 @@ class Image(BaseImage):
         )
 
 
+class Board(models.Model):
+    class Meta:
+        unique_together = ("submitter", "name")
+        index_together = ("submitter", "name")
+
+    submitter = models.ForeignKey(User)
+    name = models.CharField(max_length=128, blank=False, null=False)
+    pins = models.ManyToManyField("Pin", related_name="pins", blank=True)
+
+    published = models.DateTimeField(auto_now_add=True)
+
+
 class Pin(models.Model):
     submitter = models.ForeignKey(User)
     url = models.URLField(null=True, blank=True)
