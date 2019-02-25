@@ -14,6 +14,7 @@
             <link rel="stylesheet" href="{% static "css/messages.css" %}"/>
             <link rel="stylesheet" href="{% static "css/lightbox.css" %}"/>
             <link rel="stylesheet" href="{% static "css/pinry.css" %}"/>
+            <link rel="stylesheet" href="{% static "css/vue-pin.css" %}"/>
         {%  endcompress %}
         {% compress css inline %}
             {% block extra_css %}{% endblock %}
@@ -93,6 +94,7 @@
         <!-- End Content -->
 
         <!-- Templates -->
+        {% include 'includes/vue-pin.html' %}
         {% block extra_templates %}{% endblock %}
         <!-- End Templates -->
 
@@ -106,10 +108,6 @@
         {% compress js %}
             <script src="{% static "js/helpers.js" %}"></script>
             <script src="{% static "js/vendors/vue-waterfall.min.js" %}"></script>
-{#            <script src="{% static "js/messages.js" %}"></script>#}
-{#            <script src="{% static "js/lightbox.js" %}"></script>#}
-{#            <script src="{% static "js/pinry.js" %}"></script>#}
-{#            <script src="{% static "js/pin-form.js" %}"></script>#}
             <script src="{% static "js/vue/main.js" %}"></script>
         {% endcompress %}
         {% compress js inline %}
