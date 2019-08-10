@@ -35,8 +35,7 @@ class ImageManager(models.Manager):
         # a chance of getting Database into a inconsistent state when we
         # try to create thumbnails one by one later
         image = self.create(image=obj)
-        for size in settings.IMAGE_SIZES.keys():
-            Thumbnail.objects.get_or_create_at_size(image.pk, size)
+        Thumbnail.objects.get_or_create_at_sizes(image, settings.IMAGE_SIZES.keys())
         return image
 
 
@@ -72,11 +71,11 @@ class Image(BaseImage):
 
 class Pin(models.Model):
     submitter = models.ForeignKey(User)
-    url = models.URLField(null=True, blank=True)
+    url = models.CharField(null=True, blank=True, max_length=256)
     # origin is tha same as referer but not work,
     # should be removed some day
-    origin = models.URLField(null=True, blank=True)
-    referer = models.URLField(null=True, blank=True)
+    origin = models.CharField(null=True, blank=True, max_length=256)
+    referer = models.CharField(null=True, blank=True, max_length=256)
     description = models.TextField(blank=True, null=True)
     image = models.ForeignKey(Image, related_name='pin')
     published = models.DateTimeField(auto_now_add=True)
